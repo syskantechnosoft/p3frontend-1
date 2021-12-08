@@ -20,7 +20,8 @@
   flex-direction: column;
   align-items: center;
   & > img {
-    max-height: 20rem;
+    height: 20rem;
+    width: 20rem;
     border-radius: 50%;
     border: 1rem solid $orange;
     margin-bottom: 1rem;
