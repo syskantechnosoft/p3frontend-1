@@ -21,6 +21,7 @@
           #f="ngForm"
           novalidate
         >
+          <!-- <div class="login__form__group"> -->
           <label for="username">Username </label>
           <input
             type="text"
@@ -37,7 +38,7 @@
           >
             Username is required!
           </div>
-
+          <!--  </div> -->
           <label for="password">Password </label>
           <input
             type="password"
@@ -49,7 +50,7 @@
             #password="ngModel"
           />
           <div
-            class="alert alert-danger"
+            class="password__dropdown"
             role="alert"
             *ngIf="password.errors && f.submitted"
           >
