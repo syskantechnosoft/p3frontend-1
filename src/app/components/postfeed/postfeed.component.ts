@@ -7,6 +7,7 @@ import { Post } from 'src/app/Post';
 import { FollowerService } from 'src/app/services/follower.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-postfeed',
@@ -20,12 +21,13 @@ export class PostfeedComponent implements OnInit {
   comments: Post[] = [];
   tId: number = 0;
   feed: Feed | undefined;
-  user!: Users;
+  user = this.tService.getUser();
 
   constructor(
     private pService: PostService,
     private uService: UserService,
-    private fService: FollowerService
+    private fService: FollowerService,
+    private tService: TokenStorageService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class PostfeedComponent implements OnInit {
 
   private getData() {
     this.pService.getPosts().subscribe((posts: Post[]) => {
-      this.getUser();
+      this.getLoggedInUser();
       this.getAllFollowers();
       this.posts = posts;
       this.posts.reverse();
@@ -45,14 +47,19 @@ export class PostfeedComponent implements OnInit {
     });
   }
 
-  private getUser() {
-    let user = sessionStorage.getItem('auth-user');
-    let userId = user?.charAt(6);
-    this.uService.getUserById(Number(userId)).subscribe((lUser: Users) => {
-      this.user = lUser;
-      localStorage.setItem('firstName', this.user.firstName);
-      localStorage.setItem('lastName', this.user.lastName);
-      localStorage.setItem('userId', this.user.userId.toString());
+  private getLoggedInUser() {
+    // this.tService.getUser().subscribe((user) => {
+    //   this.user = user;
+    //   console.log(this.user.userId);
+    // });
+
+    let id = this.user.id;
+
+    console.log(this.user.id);
+    this.uService.getUserById(id).subscribe((lUser: Users) => {
+      localStorage.setItem('firstName', lUser.firstName);
+      localStorage.setItem('lastName', lUser.lastName);
+      localStorage.setItem('userId', this.user.id.toString());
     });
   }
 
