@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Feed } from 'src/app/Feed';
 import { Users } from 'src/app/models/user';
 import { Post } from 'src/app/Post';
@@ -48,18 +46,12 @@ export class PostfeedComponent implements OnInit {
   }
 
   private getLoggedInUser() {
-    // this.tService.getUser().subscribe((user) => {
-    //   this.user = user;
-    //   console.log(this.user.userId);
-    // });
-
     let id = this.user.id;
 
-    console.log(this.user.id);
     this.uService.getUserById(id).subscribe((lUser: Users) => {
       localStorage.setItem('firstName', lUser.firstName);
       localStorage.setItem('lastName', lUser.lastName);
-      localStorage.setItem('userId', this.user.id.toString());
+      //localStorage.setItem('userId', this.user.id.toString());
     });
   }
 
@@ -76,7 +68,7 @@ export class PostfeedComponent implements OnInit {
     this.followed.forEach((f) => {
       this.followedIdArr.push(f.followedId);
     });
-    this.followedIdArr.push(this.user.userId);
+    this.followedIdArr.push(this.user.id);
     this.posts = this.posts.filter((p) => {
       return this.followedIdArr.includes(p.usersId);
     });
