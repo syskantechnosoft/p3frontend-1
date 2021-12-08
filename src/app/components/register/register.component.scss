@@ -40,21 +40,8 @@
 }
 
 .register__card__form {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  row-gap: 1rem;
-
-  & > label {
-    grid-column: span 1;
-  }
-
-  & > input {
-    grid-column: span 2;
-    border-bottom: 1px solid $orange;
-    padding: 0.325rem;
-    padding-bottom: 0;
-  }
+  display: flex;
+  flex-direction: column;
 
   & > button {
     grid-column: 2 / 3;
@@ -66,6 +53,30 @@
       background-color: $light-gray;
     }
   }
+}
+
+.register__form__group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1rem 0;
+  align-items: center;
+  & > label {
+    grid-column: span 1;
+  }
+
+  & > input {
+    grid-column: span 2;
+    border-bottom: 1px solid $orange;
+    padding: 0.325rem;
+    padding-bottom: 0;
+  }
+}
+
+.register__error {
+  grid-column: 1 / -1;
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .register__card__login-container {
