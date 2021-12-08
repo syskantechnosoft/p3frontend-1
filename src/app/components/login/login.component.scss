@@ -39,10 +39,29 @@
 }
 
 .login__card__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > button {
+    // grid-column: 2 / 3;
+    color: $white;
+    background-color: $orange;
+    border-radius: 0.325rem;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    &:hover {
+      background-color: $light-gray;
+    }
+  }
+}
+
+.login__form__group {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  row-gap: 1rem;
+  margin: 1rem 0;
 
   & > label {
     grid-column: span 1;
@@ -54,25 +73,18 @@
     padding: 0.325rem;
     padding-bottom: 0;
   }
-
-  & > button {
-    grid-column: 2 / 3;
-    color: $white;
-    background-color: $orange;
-    border-radius: 0.325rem;
-    padding: 0.5rem 0;
-    &:hover {
-      background-color: $light-gray;
-    }
-  }
 }
 
-/* .login__form__group {
-  grid-column: span 2;
-}
- */
-.login__card__register-container {
+.login__error {
+  grid-column: 1 / -1;
+  color: red;
+  font-family: "FuturaHeavy";
+  text-align: center;
   margin-top: 1rem;
+}
+
+.login__card__register-container {
+  // margin-top: 1rem;
   text-align: center;
 
   & > a {
